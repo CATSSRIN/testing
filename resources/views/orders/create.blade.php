@@ -11,8 +11,11 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('orders.store') }}" x-data="orderForm()">
+            <form method="POST" action="{{ route('orders.store') }}" x-data="orderForm()" @submit="prepareSubmit">
                 @csrf
+
+                <!-- Hidden items container (populated on submit) -->
+                <div id="hidden-items"></div>
 
                 <div class="flex flex-col lg:flex-row gap-6">
                     <!-- Left: Products -->
@@ -43,28 +46,17 @@
                                             @if($product->category)
                                                 <p class="text-xs text-gray-400">{{ $product->category }}</p>
                                             @endif
-                                            @if($product->description)
-                                                <p class="text-xs text-gray-400 mt-0.5">{{ Str::limit($product->description, 60) }}</p>
-                                            @endif
                                         </div>
-                                        <div class="text-sm font-semibold text-indigo-600 w-20 text-right">${{ number_format($product->price, 2) }}<span class="text-xs font-normal text-gray-400">/{{ $product->unit }}</span></div>
+                                        <div class="text-sm font-semibold text-indigo-600 w-24 text-right">${{ number_format($product->price, 2) }}<span class="text-xs font-normal text-gray-400">/{{ $product->unit }}</span></div>
                                         <div class="flex items-center gap-2">
                                             <button type="button" @click="decrement({{ $product->id }})" class="w-7 h-7 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full text-gray-600 transition font-bold">−</button>
                                             <input type="number" min="0"
-                                                :name="quantities[{{ $product->id }}] > 0 ? 'items[{{ $loop->index }}][quantity]' : null"
                                                 x-model.number="quantities[{{ $product->id }}]"
-                                                @change="setQuantity({{ $product->id }}, $event.target.value, {{ $product->price }})"
+                                                @change="setQuantity({{ $product->id }}, $event.target.value)"
                                                 class="w-14 text-center border-gray-300 rounded-lg text-sm py-1 focus:ring-indigo-500 focus:border-indigo-500" />
                                             <button type="button" @click="increment({{ $product->id }}, {{ $product->price }})" class="w-7 h-7 flex items-center justify-center bg-indigo-100 hover:bg-indigo-200 rounded-full text-indigo-600 transition font-bold">+</button>
                                         </div>
                                     </div>
-                                    <!-- Hidden inputs for product_id -->
-                                    <template x-if="quantities[{{ $product->id }}] > 0">
-                                        <input type="hidden" :name="'items[' + getItemIndex({{ $product->id }}) + '][product_id]'" value="{{ $product->id }}" />
-                                    </template>
-                                    <template x-if="quantities[{{ $product->id }}] > 0">
-                                        <input type="hidden" :name="'items[' + getItemIndex({{ $product->id }}) + '][quantity]'" :value="quantities[{{ $product->id }}]" />
-                                    </template>
                                     @endforeach
                                 </div>
                             </div>
@@ -86,7 +78,7 @@
                             <div class="space-y-2 max-h-64 overflow-y-auto mb-4" x-show="selectedItems.length > 0">
                                 <template x-for="item in selectedItems" :key="item.id">
                                     <div class="flex justify-between text-sm">
-                                        <span class="text-gray-600" x-text="item.name + ' x' + item.qty"></span>
+                                        <span class="text-gray-600" x-text="item.name + ' ×' + item.qty"></span>
                                         <span class="font-medium text-gray-800" x-text="'$' + (item.price * item.qty).toFixed(2)"></span>
                                     </div>
                                 </template>
@@ -134,19 +126,34 @@
             get total() {
                 return this.selectedItems.reduce((sum, i) => sum + i.price * i.qty, 0);
             },
-            increment(id, price) {
+            increment(id) {
                 if (!this.quantities[id]) this.quantities[id] = 0;
                 this.quantities[id]++;
             },
             decrement(id) {
                 if (this.quantities[id] > 0) this.quantities[id]--;
             },
-            setQuantity(id, val, price) {
+            setQuantity(id, val) {
                 const v = parseInt(val);
                 this.quantities[id] = isNaN(v) || v < 0 ? 0 : v;
             },
-            getItemIndex(id) {
-                return this.selectedItems.findIndex(i => i.id === parseInt(id));
+            prepareSubmit(e) {
+                const container = document.getElementById('hidden-items');
+                container.innerHTML = '';
+                let index = 0;
+                for (const item of this.selectedItems) {
+                    const pid = document.createElement('input');
+                    pid.type = 'hidden';
+                    pid.name = `items[${index}][product_id]`;
+                    pid.value = item.id;
+                    container.appendChild(pid);
+                    const qty = document.createElement('input');
+                    qty.type = 'hidden';
+                    qty.name = `items[${index}][quantity]`;
+                    qty.value = item.qty;
+                    container.appendChild(qty);
+                    index++;
+                }
             }
         }
     }

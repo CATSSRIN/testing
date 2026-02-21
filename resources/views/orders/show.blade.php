@@ -21,8 +21,8 @@
                     </div>
                     <div>
                         <p class="text-xs text-gray-400 uppercase tracking-wide">Status</p>
-                        @php $colors = ['pending'=>'yellow','confirmed'=>'blue','delivered'=>'green','cancelled'=>'red']; $c = $colors[$order->status] ?? 'gray'; @endphp
-                        <span class="mt-1 inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium bg-{{ $c }}-100 text-{{ $c }}-700 capitalize">{{ $order->status }}</span>
+                        @php $statusCls = match($order->status) { 'confirmed' => 'bg-blue-100 text-blue-700', 'delivered' => 'bg-green-100 text-green-700', 'cancelled' => 'bg-red-100 text-red-700', default => 'bg-yellow-100 text-yellow-700' }; @endphp
+                        <span class="mt-1 inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium {{ $statusCls }} capitalize">{{ $order->status }}</span>
                     </div>
                     <div>
                         <p class="text-xs text-gray-400 uppercase tracking-wide">Total</p>
