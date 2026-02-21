@@ -37,6 +37,9 @@
                         <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
                             {{ __('Products') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                            {{ __('Users') }}
+                        </x-nav-link>
                     @else
                         <x-nav-link :href="route('ships.index')" :active="request()->routeIs('ships.*')">
                             {{ __('My Ships') }}
@@ -101,6 +104,7 @@
                 <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">{{ __('Orders') }}</x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.vendors.index')" :active="request()->routeIs('admin.vendors.*')">{{ __('Vendors') }}</x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">{{ __('Products') }}</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">{{ __('Users') }}</x-responsive-nav-link>
             @else
                 <x-responsive-nav-link :href="route('ships.index')" :active="request()->routeIs('ships.*')">{{ __('My Ships') }}</x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('orders.create')" :active="request()->routeIs('orders.create')">{{ __('New Order') }}</x-responsive-nav-link>
