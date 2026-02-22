@@ -39,7 +39,7 @@
                                         <p class="text-sm text-gray-400">IMO: {{ $ship->imo_number }}</p>
                                     @endif
                                     @if($ship->flag)
-                                        <p class="text-sm text-gray-400">Flag: {{ $ship->flag }}</p>
+                                        <p class="text-sm text-gray-400">{{ __('Flag') }}: {{ $ship->flag }}</p>
                                     @endif
                                 </div>
                             </div>

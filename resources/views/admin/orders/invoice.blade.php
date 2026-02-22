@@ -30,7 +30,7 @@
 <body>
     <div class="header">
         <div>
-            <div class="company-name">Ship Order</div>
+            <div class="company-name">{{ __('Ship Order') }}</div>
             <div style="color:#6b7280; margin-top:4px;">{{ __('Ship Supply Management') }}</div>
         </div>
         <div>
@@ -94,13 +94,13 @@
 
     @if($order->notes)
     <div style="margin-top:24px; padding:12px; background:#f9fafb; border-radius:6px; border:1px solid #e5e7eb;">
-        <strong style="font-size:10px; text-transform:uppercase; color:#6b7280;">Notes:</strong>
+        <strong style="font-size:10px; text-transform:uppercase; color:#6b7280;">{{ __('Notes:') }}</strong>
         <p style="margin-top:4px; color:#374151;">{{ $order->notes }}</p>
     </div>
     @endif
 
     <div class="footer">
-        <p>{{ __('Thank you for your business!') }} &bull; Ship Order Management System</p>
+        <p>{{ __('Thank you for your business!') }} &bull; {{ __('Ship Order Management System') }}</p>
         <p style="margin-top:4px;">{{ __('Generated on') }} {{ now()->format('F d, Y H:i') }}</p>
     </div>
 </body>
