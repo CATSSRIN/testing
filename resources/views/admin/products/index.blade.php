@@ -51,10 +51,10 @@
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <div class="flex justify-end gap-2">
-                                        <a href="{{ route('admin.products.edit', $product) }}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">{{ __("Edit") }}</a>
+                                        <a href="{{ route('admin.products.edit', $product) }}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">{{ __('Edit') }}</a>
                                         <form method="POST" action="{{ route('admin.products.destroy', $product) }}" onsubmit="return confirm('{{ __('Delete this product?') }}')">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:text-red-700 text-sm font-medium">{{ __("Delete") }}</button>
+                                            <button type="submit" class="text-red-500 hover:text-red-700 text-sm font-medium">{{ __('Delete') }}</button>
                                         </form>
                                     </div>
                                 </td>
