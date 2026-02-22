@@ -61,17 +61,6 @@
             <!-- Settings Dropdown -->
             @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6 gap-3">
-                <!-- Language Switch -->
-                <div class="flex items-center gap-1 text-sm">
-                    @if(app()->getLocale() === 'id')
-                        <a href="{{ route('lang.switch', 'en') }}" class="px-2 py-1 rounded text-gray-500 hover:text-indigo-600 hover:bg-gray-100 transition font-medium">EN</a>
-                        <span class="px-2 py-1 rounded bg-indigo-100 text-indigo-700 font-semibold">ID</span>
-                    @else
-                        <span class="px-2 py-1 rounded bg-indigo-100 text-indigo-700 font-semibold">EN</span>
-                        <a href="{{ route('lang.switch', 'id') }}" class="px-2 py-1 rounded text-gray-500 hover:text-indigo-600 hover:bg-gray-100 transition font-medium">ID</a>
-                    @endif
-                </div>
-
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -137,16 +126,6 @@
                     @csrf
                     <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Log Out') }}</x-responsive-nav-link>
                 </form>
-                <!-- Language switch (mobile) -->
-                <div class="flex items-center gap-2 px-4 py-2">
-                    @if(app()->getLocale() === 'id')
-                        <a href="{{ route('lang.switch', 'en') }}" class="text-sm text-gray-500 hover:text-indigo-600">EN</a>
-                        <span class="text-sm font-semibold text-indigo-700">ID</span>
-                    @else
-                        <span class="text-sm font-semibold text-indigo-700">EN</span>
-                        <a href="{{ route('lang.switch', 'id') }}" class="text-sm text-gray-500 hover:text-indigo-600">ID</a>
-                    @endif
-                </div>
             </div>
         </div>
     </div>
