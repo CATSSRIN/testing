@@ -8,18 +8,18 @@
                         @if(auth()->user()->is_admin)
                             <a href="{{ route('admin.orders.index') }}" class="flex items-center gap-2 text-indigo-600 font-bold text-lg">
                                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                                Ship Order
+                                {{ __('Ship Order') }}
                             </a>
                         @else
                             <a href="{{ route('ships.index') }}" class="flex items-center gap-2 text-indigo-600 font-bold text-lg">
                                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                                Ship Order
+                                {{ __('Ship Order') }}
                             </a>
                         @endif
                     @else
                         <span class="flex items-center gap-2 text-indigo-600 font-bold text-lg">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                            Ship Order
+                            {{ __('Ship Order') }}
                         </span>
                     @endauth
                 </div>
