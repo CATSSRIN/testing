@@ -35,6 +35,9 @@ class OrderController extends Controller
         $request->validate([
             'ship_id' => ['required', 'exists:ships,id'],
             'notes' => ['nullable', 'string'],
+            'pickup_date' => ['nullable', 'date'],
+            'pickup_time' => ['nullable', 'date_format:H:i'],
+            'pickup_location' => ['nullable', 'string', 'max:255'],
             'items' => ['required', 'array', 'min:1'],
             'items.*.product_id' => ['required', 'exists:products,id'],
             'items.*.quantity' => ['required', 'integer', 'min:1'],
@@ -65,6 +68,9 @@ class OrderController extends Controller
                 'total_price' => $total,
                 'status' => 'pending',
                 'notes' => $request->notes,
+                'pickup_date' => $request->pickup_date,
+                'pickup_time' => $request->pickup_time,
+                'pickup_location' => $request->pickup_location,
             ]);
 
             foreach ($orderItems as $item) {

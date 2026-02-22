@@ -35,6 +35,19 @@
                         <p class="text-sm text-gray-600 mt-1">{{ $order->notes }}</p>
                     </div>
                 @endif
+                @if($order->pickup_date || $order->pickup_time || $order->pickup_location)
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <p class="text-xs text-gray-400 uppercase tracking-wide">{{ __('Informasi Pengambilan') }}</p>
+                        <div class="mt-1 text-sm text-gray-600 space-y-0.5">
+                            @if($order->pickup_date)
+                                <div>{{ \Carbon\Carbon::parse($order->pickup_date)->format('d M Y') }}{{ $order->pickup_time ? ' pukul ' . \Carbon\Carbon::parse($order->pickup_time)->format('H:i') : '' }}</div>
+                            @endif
+                            @if($order->pickup_location)
+                                <div>{{ $order->pickup_location }}</div>
+                            @endif
+                        </div>
+                    </div>
+                @endif
             </div>
 
             <!-- Items -->

@@ -65,8 +65,27 @@
 
                         <!-- Notes -->
                         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-                            <x-input-label for="notes" :value="__('Notes (optional)')" />
-                            <textarea id="notes" name="notes" rows="3" class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="Any special instructions...">{{ old('notes') }}</textarea>
+                            <x-input-label for="notes" :value="__('Catatan (opsional)')" />
+                            <textarea id="notes" name="notes" rows="3" class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="Instruksi khusus...">{{ old('notes') }}</textarea>
+                        </div>
+
+                        <!-- Pickup Info -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                            <h3 class="font-semibold text-gray-800 mb-3">{{ __('Informasi Pengambilan (opsional)') }}</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <x-input-label for="pickup_date" :value="__('Tanggal Pengambilan')" />
+                                    <input type="date" id="pickup_date" name="pickup_date" value="{{ old('pickup_date') }}" class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm" />
+                                </div>
+                                <div>
+                                    <x-input-label for="pickup_time" :value="__('Waktu Pengambilan')" />
+                                    <input type="time" id="pickup_time" name="pickup_time" value="{{ old('pickup_time') }}" class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm" />
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <x-input-label for="pickup_location" :value="__('Lokasi Pengambilan')" />
+                                <input type="text" id="pickup_location" name="pickup_location" value="{{ old('pickup_location') }}" class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="Dermaga, pelabuhan, atau lokasi lainnya..." />
+                            </div>
                         </div>
                     </div>
 

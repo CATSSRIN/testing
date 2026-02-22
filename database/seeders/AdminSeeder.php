@@ -14,53 +14,53 @@ class AdminSeeder extends Seeder
     {
         // Create admin user
         User::firstOrCreate(
-            ['email' => 'admin@shiporder.com'],
+            ['email' => 'admin@email.com'],
             [
                 'name' => 'Admin',
                 'company_name' => 'Ship Order Admin',
-                'email' => 'admin@shiporder.com',
+                'email' => 'admin@email.com',
                 'password' => Hash::make('password'),
                 'is_admin' => true,
             ]
         );
 
-        // Sample vendors and products
+        // Sample vendors and products (Indonesian)
         $vendorData = [
             [
-                'name' => 'FreshFoods Supply Co.',
-                'contact_name' => 'John Smith',
-                'email' => 'john@freshfoods.com',
+                'name' => 'Sumber Pangan Segar',
+                'contact_name' => 'Budi Santoso',
+                'email' => 'budi@sumberpangan.com',
                 'phone' => '+62-21-5550100',
                 'products' => [
-                    ['name' => 'White Rice (25kg)', 'category' => 'Dry Goods', 'price' => 520000, 'unit' => 'bag'],
-                    ['name' => 'Pasta (500g)', 'category' => 'Dry Goods', 'price' => 52000, 'unit' => 'pack'],
-                    ['name' => 'Canned Tuna', 'category' => 'Canned Goods', 'price' => 45000, 'unit' => 'can'],
-                    ['name' => 'Cooking Oil (5L)', 'category' => 'Oils & Condiments', 'price' => 190000, 'unit' => 'bottle'],
-                    ['name' => 'Sugar (5kg)', 'category' => 'Dry Goods', 'price' => 135000, 'unit' => 'bag'],
+                    ['name' => 'Beras Putih (25kg)', 'category' => 'Sembako', 'price' => 520000, 'unit' => 'karung'],
+                    ['name' => 'Mie Kering (500g)', 'category' => 'Sembako', 'price' => 52000, 'unit' => 'bungkus'],
+                    ['name' => 'Ikan Tuna Kaleng', 'category' => 'Makanan Kaleng', 'price' => 45000, 'unit' => 'kaleng'],
+                    ['name' => 'Minyak Goreng (5L)', 'category' => 'Minyak & Bumbu', 'price' => 190000, 'unit' => 'botol'],
+                    ['name' => 'Gula Pasir (5kg)', 'category' => 'Sembako', 'price' => 135000, 'unit' => 'karung'],
                 ],
             ],
             [
-                'name' => 'Marine Beverages Ltd.',
-                'contact_name' => 'Sarah Lee',
-                'email' => 'sarah@marinebev.com',
+                'name' => 'Minuman Bahari Nusantara',
+                'contact_name' => 'Sari Dewi',
+                'email' => 'sari@minumanbahari.com',
                 'phone' => '+62-21-5550200',
                 'products' => [
-                    ['name' => 'Mineral Water (1.5L)', 'category' => 'Beverages', 'price' => 24000, 'unit' => 'bottle'],
-                    ['name' => 'Orange Juice (1L)', 'category' => 'Beverages', 'price' => 60000, 'unit' => 'carton'],
-                    ['name' => 'Coffee (500g)', 'category' => 'Hot Drinks', 'price' => 225000, 'unit' => 'pack'],
-                    ['name' => 'Black Tea (100 bags)', 'category' => 'Hot Drinks', 'price' => 105000, 'unit' => 'box'],
+                    ['name' => 'Air Mineral (1.5L)', 'category' => 'Minuman', 'price' => 24000, 'unit' => 'botol'],
+                    ['name' => 'Jus Jeruk (1L)', 'category' => 'Minuman', 'price' => 60000, 'unit' => 'karton'],
+                    ['name' => 'Kopi Bubuk (500g)', 'category' => 'Minuman Panas', 'price' => 225000, 'unit' => 'bungkus'],
+                    ['name' => 'Teh Hitam (100 kantong)', 'category' => 'Minuman Panas', 'price' => 105000, 'unit' => 'kotak'],
                 ],
             ],
             [
-                'name' => 'Cold Chain Dairy',
-                'contact_name' => 'Mike Chen',
-                'email' => 'mike@coldchain.com',
+                'name' => 'Rantai Dingin Susu Nusantara',
+                'contact_name' => 'Agus Wijaya',
+                'email' => 'agus@rantaidingin.com',
                 'phone' => '+62-21-5550300',
                 'products' => [
-                    ['name' => 'UHT Milk (1L)', 'category' => 'Dairy', 'price' => 35000, 'unit' => 'carton'],
-                    ['name' => 'Butter (500g)', 'category' => 'Dairy', 'price' => 88000, 'unit' => 'pack'],
-                    ['name' => 'Cheese Slices', 'category' => 'Dairy', 'price' => 77000, 'unit' => 'pack'],
-                    ['name' => 'Eggs (30 pcs)', 'category' => 'Dairy', 'price' => 144000, 'unit' => 'tray'],
+                    ['name' => 'Susu UHT (1L)', 'category' => 'Susu & Olahan', 'price' => 35000, 'unit' => 'karton'],
+                    ['name' => 'Mentega (500g)', 'category' => 'Susu & Olahan', 'price' => 88000, 'unit' => 'bungkus'],
+                    ['name' => 'Keju Slice', 'category' => 'Susu & Olahan', 'price' => 77000, 'unit' => 'bungkus'],
+                    ['name' => 'Telur Ayam (30 butir)', 'category' => 'Susu & Olahan', 'price' => 144000, 'unit' => 'tray'],
                 ],
             ],
         ];
