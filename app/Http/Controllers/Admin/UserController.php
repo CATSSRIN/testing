@@ -10,9 +10,47 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
+    public function indexWarehouses()
+    {
+        $warehouses = User::where('is_warehouse', true)->latest()->paginate(20);
+        return view('admin.warehouses.index', compact('warehouses'));
+    }
+
+    public function createWarehouse()
+    {
+        return view('admin.warehouses.create');
+    }
+
+    public function storeWarehouse(Request $request)
+    {
+        $request->validate([
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        User::create([
+            'name'         => $request->name,
+            'email'        => $request->email,
+            'password'     => Hash::make($request->password),
+            'is_warehouse' => true,
+        ]);
+
+        return redirect()->route('admin.warehouses.index')->with('success', 'Warehouse account created successfully.');
+    }
+
+    public function destroyWarehouse(User $user)
+    {
+        abort_unless($user->is_warehouse, 404);
+
+        $user->delete();
+
+        return redirect()->route('admin.warehouses.index')->with('success', 'Warehouse account deleted successfully.');
+    }
+
     public function index()
     {
-        $users = User::where('is_admin', false)->withCount('ships')->latest()->paginate(20);
+        $users = User::where('is_admin', false)->where('is_warehouse', false)->withCount('ships')->latest()->paginate(20);
         return view('admin.users.index', compact('users'));
     }
 
