@@ -15,6 +15,13 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('/lang/{locale}', function (string $locale) {
+    if (in_array($locale, ['en', 'id'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
 Route::get('/dashboard', function () {
     if (auth()->user()->is_admin) {
         return redirect()->route('admin.orders.index');

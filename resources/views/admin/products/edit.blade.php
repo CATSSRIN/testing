@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Edit Product</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Edit Product') }}</h2>
     </x-slot>
 
     <div class="py-8">
@@ -12,7 +12,7 @@
                         <div>
                             <x-input-label for="vendor_id" :value="__('Vendor')" />
                             <select id="vendor_id" name="vendor_id" required class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                                <option value="">-- Select Vendor --</option>
+                                <option value="">{{ __('-- Select Vendor --') }}</option>
                                 @foreach($vendors as $vendor)
                                     <option value="{{ $vendor->id }}" {{ old('vendor_id', $product->vendor_id) == $vendor->id ? 'selected' : '' }}>{{ $vendor->name }}</option>
                                 @endforeach
@@ -34,7 +34,7 @@
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <x-input-label for="price" :value="__('Price ($)')" />
+                                <x-input-label for="price" :value="__('Price (Rp)')" />
                                 <x-text-input id="price" name="price" type="number" step="0.01" min="0" class="mt-1 block w-full" :value="old('price', $product->price)" required />
                                 <x-input-error :messages="$errors->get('price')" class="mt-2" />
                             </div>
@@ -49,8 +49,8 @@
                         </div>
                     </div>
                     <div class="mt-6 flex items-center gap-3">
-                        <x-primary-button>Update Product</x-primary-button>
-                        <a href="{{ route('admin.products.index') }}" class="text-sm text-gray-500 hover:text-gray-700">Cancel</a>
+                        <x-primary-button>{{ __('Update Product') }}</x-primary-button>
+                        <a href="{{ route('admin.products.index') }}" class="text-sm text-gray-500 hover:text-gray-700">{{ __('Cancel') }}</a>
                     </div>
                 </form>
             </div>

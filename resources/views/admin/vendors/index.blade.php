@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Vendors</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Vendors') }}</h2>
             <a href="{{ route('admin.vendors.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                Add Vendor
+                {{ __('Add Vendor') }}
             </a>
         </div>
     </x-slot>
@@ -17,17 +17,17 @@
 
             @if($vendors->isEmpty())
                 <div class="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100">
-                    <p class="text-gray-400">No vendors yet.</p>
+                    <p class="text-gray-400">{{ __('No vendors yet.') }}</p>
                 </div>
             @else
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     <table class="min-w-full divide-y divide-gray-100">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Vendor</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Contact</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Products</th>
-                                <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Actions</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Vendor') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Contact') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Products') }}</th>
+                                <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-50">
@@ -44,10 +44,10 @@
                                 <td class="px-6 py-4 text-sm text-gray-600">{{ $vendor->products_count }}</td>
                                 <td class="px-6 py-4 text-right">
                                     <div class="flex justify-end gap-2">
-                                        <a href="{{ route('admin.vendors.edit', $vendor) }}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Edit</a>
-                                        <form method="POST" action="{{ route('admin.vendors.destroy', $vendor) }}" onsubmit="return confirm('Delete this vendor?')">
+                                        <a href="{{ route('admin.vendors.edit', $vendor) }}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">{{ __('Edit') }}</a>
+                                        <form method="POST" action="{{ route('admin.vendors.destroy', $vendor) }}" onsubmit="return confirm('{{ __('Delete this vendor?') }}')">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:text-red-700 text-sm font-medium">Delete</button>
+                                            <button type="submit" class="text-red-500 hover:text-red-700 text-sm font-medium">{{ __('Delete') }}</button>
                                         </form>
                                     </div>
                                 </td>

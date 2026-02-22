@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Place New Order</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Place New Order') }}</h2>
     </x-slot>
 
     <div class="py-8">
@@ -22,9 +22,9 @@
                     <div class="flex-1 space-y-6">
                         <!-- Ship Selection -->
                         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-                            <h3 class="font-semibold text-gray-800 mb-3">Select Ship</h3>
+                            <h3 class="font-semibold text-gray-800 mb-3">{{ __('Select Ship') }}</h3>
                             <select name="ship_id" required class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                                <option value="">-- Choose a ship --</option>
+                                <option value="">{{ __('-- Choose a ship --') }}</option>
                                 @foreach($ships as $ship)
                                     <option value="{{ $ship->id }}" {{ old('ship_id') == $ship->id ? 'selected' : '' }}>{{ $ship->name }}</option>
                                 @endforeach
@@ -47,7 +47,7 @@
                                                 <p class="text-xs text-gray-400">{{ $product->category }}</p>
                                             @endif
                                         </div>
-                                        <div class="text-sm font-semibold text-indigo-600 w-24 text-right">${{ number_format($product->price, 2) }}<span class="text-xs font-normal text-gray-400">/{{ $product->unit }}</span></div>
+                                        <div class="text-sm font-semibold text-indigo-600 w-24 text-right">Rp {{ number_format($product->price, 0, ",", ".") }}<span class="text-xs font-normal text-gray-400">/{{ $product->unit }}</span></div>
                                         <div class="flex items-center gap-2">
                                             <button type="button" @click="decrement({{ $product->id }})" class="w-7 h-7 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full text-gray-600 transition font-bold">−</button>
                                             <input type="number" min="0"
@@ -73,33 +73,33 @@
                     <!-- Right: Order Summary -->
                     <div class="lg:w-80">
                         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 sticky top-6">
-                            <h3 class="font-semibold text-gray-800 mb-4 text-lg">Order Summary</h3>
+                            <h3 class="font-semibold text-gray-800 mb-4 text-lg">{{ __('Order Summary') }}</h3>
 
                             <div class="space-y-2 max-h-64 overflow-y-auto mb-4" x-show="selectedItems.length > 0">
                                 <template x-for="item in selectedItems" :key="item.id">
                                     <div class="flex justify-between text-sm">
                                         <span class="text-gray-600" x-text="item.name + ' ×' + item.qty"></span>
-                                        <span class="font-medium text-gray-800" x-text="'$' + (item.price * item.qty).toFixed(2)"></span>
+                                        <span class="font-medium text-gray-800" x-text="'Rp ' + Math.round(item.price * item.qty).toLocaleString('id-ID')"></span>
                                     </div>
                                 </template>
                             </div>
 
                             <div x-show="selectedItems.length === 0" class="text-center py-6 text-gray-400 text-sm">
                                 <svg class="mx-auto w-8 h-8 mb-2 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                                No items selected
+                                {{ __('No items selected') }}
                             </div>
 
                             <div class="border-t border-gray-100 pt-4 mt-2">
                                 <div class="flex justify-between items-center">
-                                    <span class="font-semibold text-gray-700">Total</span>
-                                    <span class="text-xl font-bold text-indigo-600" x-text="'$' + total.toFixed(2)"></span>
+                                    <span class="font-semibold text-gray-700">{{ __('Total') }}</span>
+                                    <span class="text-xl font-bold text-indigo-600" x-text="'Rp ' + Math.round(total).toLocaleString('id-ID')"></span>
                                 </div>
                             </div>
 
                             <button type="submit" :disabled="selectedItems.length === 0" class="mt-5 w-full py-3 px-4 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
-                                Place Order
+                                {{ __('Place Order') }}
                             </button>
-                            <a href="{{ route('orders.index') }}" class="mt-2 block text-center text-sm text-gray-500 hover:text-gray-700">Cancel</a>
+                            <a href="{{ route('orders.index') }}" class="mt-2 block text-center text-sm text-gray-500 hover:text-gray-700">{{ __('Cancel') }}</a>
                         </div>
                     </div>
                 </div>
