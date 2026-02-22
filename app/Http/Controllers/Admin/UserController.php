@@ -41,6 +41,28 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User account created successfully.');
     }
 
+    public function indexAdmins()
+    {
+        $admins = User::where('is_admin', true)->latest()->paginate(20);
+        return view('admin.admins.index', compact('admins'));
+    }
+
+    public function showAdmin(User $user)
+    {
+        abort_unless($user->is_admin, 404);
+        return view('admin.admins.show', compact('user'));
+    }
+
+    public function destroyAdmin(User $user)
+    {
+        abort_unless($user->is_admin, 404);
+        abort_if($user->id === auth()->id(), 403, 'You cannot delete your own admin account.');
+
+        $user->delete();
+
+        return redirect()->route('admin.admins.index')->with('success', 'Admin account deleted successfully.');
+    }
+
     public function createAdmin()
     {
         return view('admin.users.create', ['isAdmin' => true]);
@@ -61,7 +83,7 @@ class UserController extends Controller
             'is_admin' => true,
         ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'Admin account created successfully.');
+        return redirect()->route('admin.admins.index')->with('success', 'Admin account created successfully.');
     }
 
     public function edit(User $user)

@@ -50,8 +50,11 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
     Route::get('users/{user}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
     Route::patch('users/{user}', [AdminUserController::class, 'update'])->name('users.update');
     Route::delete('users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    Route::get('admins', [AdminUserController::class, 'indexAdmins'])->name('admins.index');
     Route::get('admins/create', [AdminUserController::class, 'createAdmin'])->name('admins.create');
     Route::post('admins', [AdminUserController::class, 'storeAdmin'])->name('admins.store');
+    Route::get('admins/{user}', [AdminUserController::class, 'showAdmin'])->name('admins.show');
+    Route::delete('admins/{user}', [AdminUserController::class, 'destroyAdmin'])->name('admins.destroy');
     Route::get('users/{user}/ships/create', [AdminUserShipController::class, 'create'])->name('users.ships.create');
     Route::post('users/{user}/ships', [AdminUserShipController::class, 'store'])->name('users.ships.store');
 });
