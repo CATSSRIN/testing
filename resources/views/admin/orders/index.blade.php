@@ -23,6 +23,7 @@
                                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Ship') }}</th>
                                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Total') }}</th>
                                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Status') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Pickup') }}</th>
                                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Date') }}</th>
                                 <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Actions') }}</th>
                             </tr>
@@ -37,6 +38,20 @@
                                 <td class="px-6 py-4">
                                     @php $statusCls = match($order->status) { 'confirmed' => 'bg-blue-100 text-blue-700', 'delivered' => 'bg-green-100 text-green-700', 'cancelled' => 'bg-red-100 text-red-700', default => 'bg-yellow-100 text-yellow-700' }; @endphp
                                     <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium {{ $statusCls }} capitalize">{{ $order->status }}</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">
+                                    @if($order->pickup_date || $order->pickup_location)
+                                        <div class="space-y-0.5">
+                                            @if($order->pickup_date)
+                                                <div>{{ \Carbon\Carbon::parse($order->pickup_date)->format('d M Y') }}{{ $order->pickup_time ? ' ' . \Carbon\Carbon::parse($order->pickup_time)->format('H:i') : '' }}</div>
+                                            @endif
+                                            @if($order->pickup_location)
+                                                <div class="text-xs text-gray-400">{{ $order->pickup_location }}</div>
+                                            @endif
+                                        </div>
+                                    @else
+                                        <span class="text-gray-300">—</span>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-500">{{ $order->created_at->format('M d, Y') }}</td>
                                 <td class="px-6 py-4 text-right">
