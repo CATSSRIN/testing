@@ -5,9 +5,9 @@
             <div class="flex gap-3">
                 <a href="{{ route('admin.orders.invoice', $order) }}" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    Download Invoice
+                    {{ __('Download Invoice') }}
                 </a>
-                <a href="{{ route('admin.orders.index') }}" class="text-sm text-gray-500 hover:text-gray-700 flex items-center">← Back</a>
+                <a href="{{ route('admin.orders.index') }}" class="text-sm text-gray-500 hover:text-gray-700 flex items-center">← {{ __('Back') }}</a>
             </div>
         </div>
     </x-slot>
@@ -22,22 +22,22 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     <div>
-                        <p class="text-xs text-gray-400 uppercase">Company</p>
+                        <p class="text-xs text-gray-400 uppercase">{{ __('Company') }}</p>
                         <p class="font-semibold text-gray-800 mt-1">{{ $order->user->company_name ?? $order->user->name }}</p>
                         <p class="text-xs text-gray-400">{{ $order->user->email }}</p>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-400 uppercase">Ship</p>
+                        <p class="text-xs text-gray-400 uppercase">{{ __('Ship') }}</p>
                         <p class="font-semibold text-gray-800 mt-1">{{ $order->ship->name }}</p>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-400 uppercase">Date</p>
+                        <p class="text-xs text-gray-400 uppercase">{{ __('Date') }}</p>
                         <p class="font-semibold text-gray-800 mt-1">{{ $order->created_at->format('M d, Y H:i') }}</p>
                     </div>
                 </div>
                 @if($order->notes)
                     <div class="mt-4 pt-4 border-t border-gray-100">
-                        <p class="text-xs text-gray-400 uppercase">Notes</p>
+                        <p class="text-xs text-gray-400 uppercase">{{ __('Notes') }}</p>
                         <p class="text-sm text-gray-600 mt-1">{{ $order->notes }}</p>
                     </div>
                 @endif
@@ -45,7 +45,7 @@
 
             <!-- Status Update -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                <h3 class="font-semibold text-gray-700 mb-3">Update Status</h3>
+                <h3 class="font-semibold text-gray-700 mb-3">{{ __('Update Status') }}</h3>
                 <div class="flex flex-wrap gap-2">
                     @foreach(['pending','confirmed','delivered','cancelled'] as $status)
                         <form method="POST" action="{{ route('admin.orders.status', [$order, $status]) }}">
@@ -59,16 +59,16 @@
             <!-- Items -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="bg-gray-50 px-6 py-3 border-b border-gray-100">
-                    <h3 class="font-semibold text-gray-700">Order Items</h3>
+                    <h3 class="font-semibold text-gray-700">{{ __('Order Items') }}</h3>
                 </div>
                 <table class="min-w-full divide-y divide-gray-50">
                     <thead>
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Product</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Vendor</th>
-                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Unit Price</th>
-                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Qty</th>
-                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Subtotal</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Product') }}</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Vendor') }}</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Unit Price') }}</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Qty') }}</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Subtotal') }}</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-50">
@@ -76,16 +76,16 @@
                         <tr>
                             <td class="px-6 py-3 text-sm text-gray-800">{{ $item->product->name }}</td>
                             <td class="px-6 py-3 text-sm text-gray-500">{{ $item->product->vendor->name }}</td>
-                            <td class="px-6 py-3 text-sm text-gray-800 text-right">${{ number_format($item->unit_price, 2) }}</td>
+                            <td class="px-6 py-3 text-sm text-gray-800 text-right">Rp {{ number_format($item->unit_price, 0, ",", ".") }}</td>
                             <td class="px-6 py-3 text-sm text-gray-800 text-right">{{ $item->quantity }}</td>
-                            <td class="px-6 py-3 text-sm font-semibold text-gray-900 text-right">${{ number_format($item->subtotal, 2) }}</td>
+                            <td class="px-6 py-3 text-sm font-semibold text-gray-900 text-right">Rp {{ number_format($item->subtotal, 0, ",", ".") }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr class="bg-gray-50">
-                            <td colspan="4" class="px-6 py-3 text-right font-semibold text-gray-700">Total</td>
-                            <td class="px-6 py-3 text-right font-bold text-indigo-600 text-base">${{ number_format($order->total_price, 2) }}</td>
+                            <td colspan="4" class="px-6 py-3 text-right font-semibold text-gray-700">{{ __('Total') }}</td>
+                            <td class="px-6 py-3 text-right font-bold text-indigo-600 text-base">Rp {{ number_format($order->total_price, 0, ",", ".") }}</td>
                         </tr>
                     </tfoot>
                 </table>

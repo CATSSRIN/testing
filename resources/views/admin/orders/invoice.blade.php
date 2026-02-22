@@ -31,10 +31,10 @@
     <div class="header">
         <div>
             <div class="company-name">Ship Order</div>
-            <div style="color:#6b7280; margin-top:4px;">Ship Supply Management</div>
+            <div style="color:#6b7280; margin-top:4px;">{{ __('Ship Supply Management') }}</div>
         </div>
         <div>
-            <div class="invoice-title">INVOICE</div>
+            <div class="invoice-title">{{ __('INVOICE') }}</div>
             <div class="invoice-meta">#{{ str_pad($order->id, 6, '0', STR_PAD_LEFT) }}</div>
             <div class="invoice-meta">{{ $order->created_at->format('F d, Y') }}</div>
         </div>
@@ -44,19 +44,19 @@
 
     <div class="info-grid">
         <div class="info-block">
-            <h4>Bill To</h4>
+            <h4>{{ __('Bill To') }}</h4>
             <p>{{ $order->user->company_name ?? $order->user->name }}</p>
             <small>{{ $order->user->email }}</small>
         </div>
         <div class="info-block">
-            <h4>Ship</h4>
+            <h4>{{ __('Ship') }}</h4>
             <p>{{ $order->ship->name }}</p>
             @if($order->ship->imo_number)
                 <small>IMO: {{ $order->ship->imo_number }}</small>
             @endif
         </div>
         <div class="info-block">
-            <h4>Status</h4>
+            <h4>{{ __('Status') }}</h4>
             <span class="status-badge">{{ $order->status }}</span>
         </div>
     </div>
@@ -65,11 +65,11 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Product</th>
-                <th>Vendor</th>
-                <th class="right">Unit Price</th>
-                <th class="right">Qty</th>
-                <th class="right">Subtotal</th>
+                <th>{{ __('Product') }}</th>
+                <th>{{ __('Vendor') }}</th>
+                <th class="right">{{ __('Unit Price') }}</th>
+                <th class="right">{{ __('Qty') }}</th>
+                <th class="right">{{ __('Subtotal') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -78,16 +78,16 @@
                 <td>{{ $i + 1 }}</td>
                 <td>{{ $item->product->name }}</td>
                 <td style="color:#6b7280">{{ $item->product->vendor->name }}</td>
-                <td class="right">${{ number_format($item->unit_price, 2) }}</td>
+                <td class="right">Rp {{ number_format($item->unit_price, 0, ",", ".") }}</td>
                 <td class="right">{{ $item->quantity }}</td>
-                <td class="right">${{ number_format($item->subtotal, 2) }}</td>
+                <td class="right">Rp {{ number_format($item->subtotal, 0, ",", ".") }}</td>
             </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr class="total-row">
-                <td colspan="5" style="text-align:right; color:#374151;">Total Amount</td>
-                <td class="right total-amount">${{ number_format($order->total_price, 2) }}</td>
+                <td colspan="5" style="text-align:right; color:#374151;">{{ __('Total Amount') }}</td>
+                <td class="right total-amount">Rp {{ number_format($order->total_price, 0, ",", ".") }}</td>
             </tr>
         </tfoot>
     </table>
@@ -100,8 +100,8 @@
     @endif
 
     <div class="footer">
-        <p>Thank you for your business! &bull; Ship Order Management System</p>
-        <p style="margin-top:4px;">Generated on {{ now()->format('F d, Y H:i') }}</p>
+        <p>{{ __('Thank you for your business!') }} &bull; Ship Order Management System</p>
+        <p style="margin-top:4px;">{{ __('Generated on') }} {{ now()->format('F d, Y H:i') }}</p>
     </div>
 </body>
 </html>

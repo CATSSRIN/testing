@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ $isAdmin ? 'Add Admin' : 'Add User' }}</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ $isAdmin ? __('Add Admin') : __('Add User') }}</h2>
     </x-slot>
 
     <div class="py-8">
@@ -37,8 +37,8 @@
                         </div>
                     </div>
                     <div class="mt-6 flex items-center gap-3">
-                        <x-primary-button>{{ $isAdmin ? 'Create Admin' : 'Create User' }}</x-primary-button>
-                        <a href="{{ $isAdmin ? route('admin.admins.index') : route('admin.users.index') }}" class="text-sm text-gray-500 hover:text-gray-700">Cancel</a>
+                        <x-primary-button>{{ $isAdmin ? __('Create Admin') : __('Create User') }}</x-primary-button>
+                        <a href="{{ $isAdmin ? route('admin.admins.index') : route('admin.users.index') }}" class="text-sm text-gray-500 hover:text-gray-700">{{ __('Cancel') }}</a>
                     </div>
                 </form>
             </div>
