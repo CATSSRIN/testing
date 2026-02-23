@@ -1,0 +1,29 @@
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
+
+##changes
+Your Laravel project is now publicly accessible at **https://caez.my.id** — it's showing your login page correctly. [caez.my](https://caez.my.id/login)
+
+Here's a summary of everything that was done (all changes were safe and reversible):
+
+**1. `public_html/.htaccess` — appended rewrite rules**
+The CloudLinux block was left untouched. The following was added after it:
+```
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/testing/public/
+RewriteRule ^(.*)$ /testing/public/$1 [L]
+```
+This internally redirects all requests from `caez.my.id` to the Laravel `public` folder without exposing the path in the URL.
+
+**2. `.env` — fixed `APP_URL`**
+Changed from `http://caez.my.id/testing` → `https://caez.my.id`
+
+**3. Storage symlink created**
+`public/storage` → `storage/app/public` (needed for file uploads/images to work)
+
+**4. Caches cleared**
+`config:clear` and `cache:clear` were run so Laravel picks up the new `.env` values immediately.
+
+If the root path `caez.my.id/` doesn't redirect to `/login` automatically and instead shows something unexpected, you may want to set your app's home route (`/`) to redirect to `/login` in your `routes/web.php`.
