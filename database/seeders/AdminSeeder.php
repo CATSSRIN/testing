@@ -23,6 +23,22 @@ class AdminSeeder extends Seeder
                 'is_admin' => true,
             ]
         );
+        
+        // Create warehouse user
+        User::firstOrCreate([
+            'name'         => 'Warehouse User',
+            'email'        => 'warehouse@email.com',
+            'password'     => Hash::make('12345678'),
+            'is_warehouse' => true,
+        ]);
+
+        // Create regular user
+        User::firstOrCreate([
+            'name'         => 'Regular User',
+            'email'        => 'user@email.com',
+            'password'     => Hash::make('12345678'),
+            'is_admin' => false,
+        ]);
 
         // Sample vendors and products (Indonesian)
         $vendorData = [
