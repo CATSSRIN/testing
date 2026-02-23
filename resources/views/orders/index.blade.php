@@ -61,14 +61,61 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-500">{{ $order->created_at->format('M d, Y') }}</td>
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('orders.show', $order) }}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">{{ __('View') }}</a>
+                                    <div class="flex items-center justify-end gap-3">
+                                        <button
+                                            onclick="document.getElementById('pickup-modal-{{ $order->id }}').classList.remove('hidden')"
+                                            class="text-teal-600 hover:text-teal-800 text-sm font-medium">
+                                            {{ __('Set Schedule') }}
+                                        </button>
+                                        <a href="{{ route('orders.show', $order) }}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">{{ __('View') }}</a>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+
+                {{-- Pickup Schedule Modals --}}
+                @foreach($orders as $order)
+                <div id="pickup-modal-{{ $order->id }}" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                    <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-lg text-gray-800">{{ __('Set Shipping Schedule — Order #') }}{{ $order->id }}</h3>
+                            <button onclick="document.getElementById('pickup-modal-{{ $order->id }}').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                            </button>
+                        </div>
+                        <form method="POST" action="{{ route('orders.pickup', $order) }}">
+                            @csrf
+                            @method('PATCH')
+                            <div class="space-y-4">
+                                <div>
+                                    <x-input-label for="pickup_date_{{ $order->id }}" :value="__('Date')" />
+                                    <x-text-input id="pickup_date_{{ $order->id }}" name="pickup_date" type="date" class="mt-1 block w-full"
+                                        value="{{ $order->pickup_date ? \Carbon\Carbon::parse($order->pickup_date)->format('Y-m-d') : '' }}" />
+                                </div>
+                                <div>
+                                    <x-input-label for="pickup_time_{{ $order->id }}" :value="__('Time')" />
+                                    <x-text-input id="pickup_time_{{ $order->id }}" name="pickup_time" type="time" class="mt-1 block w-full"
+                                        value="{{ $order->pickup_time ? \Carbon\Carbon::parse($order->pickup_time)->format('H:i') : '' }}" />
+                                </div>
+                                <div>
+                                    <x-input-label for="pickup_location_{{ $order->id }}" :value="__('Location')" />
+                                    <x-text-input id="pickup_location_{{ $order->id }}" name="pickup_location" type="text" class="mt-1 block w-full"
+                                        value="{{ $order->pickup_location ?? '' }}" placeholder="{{ __('e.g. Port of Tanjung Priok') }}" />
+                                </div>
+                            </div>
+                            <div class="mt-6 flex items-center gap-3 justify-end">
+                                <button type="button" onclick="document.getElementById('pickup-modal-{{ $order->id }}').classList.add('hidden')" class="text-sm text-gray-500 hover:text-gray-700">{{ __('Cancel') }}</button>
+                                <x-primary-button>{{ __('Save') }}</x-primary-button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                @endforeach
             @endif
         </div>
     </div>
 </x-app-layout>
+

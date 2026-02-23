@@ -82,6 +82,27 @@ class OrderController extends Controller
         return redirect()->route('orders.index')->with('success', 'Order placed successfully!');
     }
 
+    public function updatePickup(Request $request, Order $order)
+    {
+        if ($order->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $request->validate([
+            'pickup_date'     => ['nullable', 'date'],
+            'pickup_time'     => ['nullable', 'date_format:H:i'],
+            'pickup_location' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        $order->update([
+            'pickup_date'     => $request->pickup_date ?: null,
+            'pickup_time'     => $request->pickup_time ?: null,
+            'pickup_location' => $request->pickup_location ?: null,
+        ]);
+
+        return redirect()->route('orders.index')->with('success', 'Shipping schedule updated successfully.');
+    }
+
     public function show(Order $order)
     {
         if ($order->user_id !== Auth::id()) {

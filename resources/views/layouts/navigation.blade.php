@@ -10,6 +10,11 @@
                                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
                                 {{ __('Ship Order') }}
                             </a>
+                        @elseif(auth()->user()->is_warehouse)
+                            <a href="{{ route('warehouse.index') }}" class="flex items-center gap-2 text-indigo-600 font-bold text-lg">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                                {{ __('Ship Order') }}
+                            </a>
                         @else
                             <a href="{{ route('ships.index') }}" class="flex items-center gap-2 text-indigo-600 font-bold text-lg">
                                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
@@ -42,6 +47,13 @@
                         </x-nav-link>
                         <x-nav-link :href="route('admin.admins.index')" :active="request()->routeIs('admin.admins.*')">
                             {{ __('Admins') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.warehouses.index')" :active="request()->routeIs('admin.warehouses.*')">
+                            {{ __('Warehouses') }}
+                        </x-nav-link>
+                    @elseif(auth()->user()->is_warehouse)
+                        <x-nav-link :href="route('warehouse.index')" :active="request()->routeIs('warehouse.*')">
+                            {{ __('Gudang') }}
                         </x-nav-link>
                     @else
                         <x-nav-link :href="route('ships.index')" :active="request()->routeIs('ships.*')">
@@ -109,6 +121,9 @@
                 <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">{{ __('Products') }}</x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">{{ __('Users') }}</x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.admins.index')" :active="request()->routeIs('admin.admins.*')">{{ __('Admins') }}</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.warehouses.index')" :active="request()->routeIs('admin.warehouses.*')">{{ __('Warehouses') }}</x-responsive-nav-link>
+            @elseif(auth()->user()->is_warehouse)
+                <x-responsive-nav-link :href="route('warehouse.index')" :active="request()->routeIs('warehouse.*')">{{ __('Gudang') }}</x-responsive-nav-link>
             @else
                 <x-responsive-nav-link :href="route('ships.index')" :active="request()->routeIs('ships.*')">{{ __('My Ships') }}</x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('orders.create')" :active="request()->routeIs('orders.create')">{{ __('New Order') }}</x-responsive-nav-link>
