@@ -19,14 +19,14 @@
                     <table class="min-w-full divide-y divide-gray-100">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Order #') }}</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Company') }}</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Ship') }}</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Total') }}</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Status') }}</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Pickup') }}</th>
-                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Date') }}</th>
-                                <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Actions') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Order #') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Company') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Ship') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Total') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Status') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Pickup') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Date') }}</th>
+                                <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
