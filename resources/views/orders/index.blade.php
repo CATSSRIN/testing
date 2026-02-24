@@ -23,6 +23,7 @@
                 </div>
             @else
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-100">
                         <thead class="bg-gray-50">
                             <tr>
@@ -35,7 +36,7 @@
                                 <th class="px-6 py-3"></th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-50">
+                        <tbody class="divide-y divide-gray-200">
                             @foreach($orders as $order)
                             <tr class="hover:bg-gray-50 transition">
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">#{{ $order->id }}</td>
@@ -74,6 +75,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
 
                 {{-- Pickup Schedule Modals --}}

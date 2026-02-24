@@ -55,6 +55,7 @@
                 <div class="bg-gray-50 px-6 py-3 border-b border-gray-100">
                     <h3 class="font-semibold text-gray-700">{{ __('Order Items') }}</h3>
                 </div>
+                <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-50">
                     <thead>
                         <tr>
@@ -65,7 +66,7 @@
                             <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Subtotal') }}</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-50">
+                    <tbody class="divide-y divide-gray-200">
                         @foreach($order->items as $item)
                         <tr>
                             <td class="px-6 py-3 text-sm text-gray-800">{{ $item->product->name }}</td>
@@ -83,6 +84,7 @@
                         </tr>
                     </tfoot>
                 </table>
+                </div>
             </div>
         </div>
     </div>
