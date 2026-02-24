@@ -40,6 +40,7 @@
                         </div>
 
                         <!-- Order Items -->
+                        <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-50">
                             <thead>
                                 <tr>
@@ -49,7 +50,7 @@
                                     <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Received Qty') }}</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-50">
+                            <tbody class="divide-y divide-gray-200">
                                 @foreach($order->items as $item)
                                 <tr>
                                     <td class="px-6 py-3 text-sm text-gray-800">{{ $item->product->name }}</td>
@@ -62,6 +63,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
 
                         <!-- Record Receipt Button -->
                         <div class="px-6 py-4 border-t border-gray-100 flex justify-end">

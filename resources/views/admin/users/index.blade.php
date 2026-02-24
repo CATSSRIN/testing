@@ -21,6 +21,7 @@
                 </div>
             @else
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-100">
                         <thead class="bg-gray-50">
                             <tr>
@@ -31,7 +32,7 @@
                                 <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-50">
+                        <tbody class="divide-y divide-gray-200">
                             @foreach($users as $user)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ $user->name }}</td>
@@ -53,6 +54,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
                 <div class="mt-4">{{ $users->links() }}</div>
             @endif
