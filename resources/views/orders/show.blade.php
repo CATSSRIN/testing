@@ -59,11 +59,11 @@
                 <table class="min-w-full divide-y divide-gray-50">
                     <thead>
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Product') }}</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">{{ __('Vendor') }}</th>
-                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Unit Price') }}</th>
-                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Qty') }}</th>
-                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">{{ __('Subtotal') }}</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Product') }}</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Vendor') }}</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Unit Price') }}</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Qty') }}</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase whitespace-nowrap">{{ __('Subtotal') }}</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
